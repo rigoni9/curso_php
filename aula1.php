@@ -1,6 +1,6 @@
 <?php
 
-echo "Hello Word<br>";
+echo "Hello World<br>";
 
 $textoPrimeiraAula = "Nosso primeiro texto do curso de programação em PHP";
 
