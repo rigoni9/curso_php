@@ -15,7 +15,7 @@ echo "<br>6 x 9 = " . (6 * 9);
 echo "<br>6 x 10 = " . (6 * 10);
 
 // Mostrando a tabuada do 6
-echo "Tabuada do numero 7: <br>";
+echo "<br>Tabuada do numero 7: <br>";
 
 echo "<br>7 x 1 = " . (7 * 1);
 echo "<br>7 x 2 = " . (7 * 2);
