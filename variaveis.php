@@ -93,3 +93,6 @@ if ($numero % 2 == 0) {
     echo "<br>É ÍMPAR";
 }
 
+// LAÇO FOR
+for ($i = 0; $i <=10; $i++)
+    echo "i= $i";
