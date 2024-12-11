@@ -1,5 +1,7 @@
 <?php
 
+// "Ctrl + S" salva o programa;
+
 const CPF = '1234567890'; //constantes são sempre em maiusculas e separadas por anderline _
 const VELOCIDADE_DA_LUZ = '320K|s2';
 
@@ -55,3 +57,39 @@ $X = $a + $b;
 echo "<br> x: " . $X;
 
 // Tema de cada sera fazer a tabuada (6, 7) e mostrar na tela.
+
+/*
+
+== (igual/comparação) 
+>= (maior igual)
+<= (menor igual)
+&& (e)
+|| (ou)
+= (atribuição)
+. (concatenação)
+% (módulo - pega o resto da divisão)
+
+if / else / else if - se senão
+
+if (CONDIÇÃO) {
+    o que queremos executar/validar
+} else  if{
+    outra condição
+} else {
+    outra CONDIÇÃO
+}
+
+*Exercicio 1:
+*Atribuir um valor para uma variavel chamada numero.
+*e vamos informar ao usuario, se este numero é par ou impar.
+
+*/
+
+$numero = 10;
+
+if ($numero % 2 == 0) {
+    echo "<br>É PAR!";
+} else {
+    echo "<br>É ÍMPAR";
+}
+
