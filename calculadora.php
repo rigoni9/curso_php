@@ -4,17 +4,19 @@
  * operadores (+ - * /)
 */
 
-$x = 8;
-$y = 10;
-$operador = "*";
+$numero1 = 8;
+$numero2 = 10;
+$operador = "+";
 
 if ($operador == "+") {
-    $soma = $x + $y;
-    echo "A função é $x + $y = $soma";
+    $soma = $numero1 + $numero2;
+    echo "A função é $numero1 + $numero2 = $soma";
 } else if ($operador == "-") {
-    echo "A função é $x - $y = " . ($x - $y);
+    echo "A função é $numero1 - $numero2 = " . ($numero1 - $numero2);
 } else if ($operador == "*") {
-    echo "A função é $x * $y = " . ($x * $y);
+    echo "A função é $numero1 * $numero2 = " . ($numero1 * $numero2);
 } else if ($operador == "/") {
-    echo "A função é $x / $y = " . ($x / $y);
-} 
+    echo "A função é $numero1 / $numero2 = " . ($numero1 / $numero2);
+} else {
+    echo "Operador inválido!<br> Use apenas + - * /";
+}
