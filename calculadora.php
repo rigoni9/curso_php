@@ -18,4 +18,3 @@ if ($operador == "+") {
 } else if ($operador == "/") {
     echo "A função é $x / $y = " . ($x / $y);
 } 
-adadsad
