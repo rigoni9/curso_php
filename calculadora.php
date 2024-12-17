@@ -20,3 +20,5 @@ if ($operador == "+") {
 } else {
     echo "Operador inválido!<br> Use apenas + - * /";
 }
+
+//"Crtl + Shift + L" - Seleciona um variável e adita todas que são iguais
