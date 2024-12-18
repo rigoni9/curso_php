@@ -6,11 +6,17 @@
  * 3 - escaleno
  */
 
-$ladoA = 10;
-$ladoB = 10;
-$ladoC = 10;
+$ladoA = 13;
+$ladoB = 12;
+$ladoC = 15;
 
-if ($ladoA == $ladoB && $ladoB == $ladoC) {
+$soma1 = $ladoA + $ladoB;
+$soma2 = $ladoA + $ladoC;
+$soma3 = $ladoB + $ladoC;
+
+if ($soma1 < $ladoC || $soma2 < $ladoB || $soma3 < $ladoA) {
+    echo "Não é um triângulo.";
+} else if ($ladoA == $ladoB && $ladoB == $ladoC) {
     echo "As medidas informadas formam um triângulo Equilátero.";
 } else if ($ladoA == $ladoB && $ladoB != $ladoC || $ladoA == $ladoC && $ladoC != $ladoB || $ladoB == $ladoC && $ladoA != $ladoB) {
     echo "As medidas informadas formam um triângulo Isóceles.";
