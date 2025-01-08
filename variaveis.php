@@ -96,3 +96,13 @@ if ($numero % 2 == 0) {
 // LAÇO FOR
 for ($i = 0; $i <=10; $i++)
     echo "i= $i";
+
+// Aula 07/01/2025
+
+$data = explode("/", $data); // [31, 01, 2025]
+$dia = $data [0];
+$mes = $data [1];
+$ano = $data [2];
+
+$dataArr = [31,01,2025];
+$data = implode("/", $dataArr); //[31, 01, 2025]

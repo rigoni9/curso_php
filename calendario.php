@@ -8,7 +8,7 @@
  * $mes = (int) $mes - Converte para um número inteiro
  */
 // 31 / 01 / 2025
-// 01 2 34 5 6789
+// 01 2 34 5 6789 (10 caracteres)
 
 
  $data = "29/01/2100";
