@@ -39,19 +39,25 @@ echo "Impares: " . implode(", ", $impares) . "<br>";
 
 //Exercício n°3:
 $numero = 100;
-
-$limitador = $numero -1;
-
-$primo = true;
 $primos = [];
-for ($i = 10; $i <= $limitador; $i++) {
-    $resto = $numero % $i;
-    if ($resto == 0) {
-        $primo = false;
-        break;
-    }else {
-        $primos[] = $i;
-        echo "<br> Primos: " . implode(", ", $primos) . "<br>";
-    }
-}
 
+for ($i = 10; $i < 50; $i++)
+    for ($i = 2; $i <= sqrt($numero); $i++) {
+        if ($numero % $i == 0) {
+            return false; // Se o número for divisível por qualquer número entre 2 e sua raiz quadrada, não é primo
+        }
+    }
+    return true; // Caso contrário, o número é primo
+    $primos[] = $i;
+
+echo "Impares: " . implode(", ", $primos) . "<br>"; 
+
+
+//Exercício n°4:
+
+$lista = [10, 5, 2, 30, 85, 14];
+
+function ordenaLista($lista);
+    for ($i = 0; $i < 6; $i++) {
+        
+    }
