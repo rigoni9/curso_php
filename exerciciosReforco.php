@@ -93,3 +93,4 @@ foreach($array as $resultado){
 
 //tema de casa, implementar o QUICK SORT
 // [150, 10, 5, 2, 30, 85, 14, 01]
+//colocar em uma função
