@@ -90,3 +90,6 @@ echo "<br><br>Array Ordenado<br>";
 foreach($array as $resultado){
     echo "[$resultado] ";
 }
+
+//tema de casa, implementar o QUICK SORT
+// [150, 10, 5, 2, 30, 85, 14, 01]
