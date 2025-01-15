@@ -38,26 +38,55 @@ echo "Impares: " . implode(", ", $impares) . "<br>";
 
 
 //Exercício n°3:
-$numero = 100;
-$primos = [];
 
-for ($i = 10; $i < 50; $i++)
-    for ($i = 2; $i <= sqrt($numero); $i++) {
-        if ($numero % $i == 0) {
-            return false; // Se o número for divisível por qualquer número entre 2 e sua raiz quadrada, não é primo
+$inicio = 10; 
+$qtdPrimos = 10; 
+$primos = []; 
+
+for ($numeroPrimo = $inicio; count($primos) < $qtdPrimos; $numeroPrimo++) { //count - conta os números dentro de uma array
+    $divisores = 0; 
+    for ($i = 2; $i < $numeroPrimo; $i++) {
+        if ($numeroPrimo % $i == 0) { 
+            $divisores++;
+            break; 
         }
     }
-    return true; // Caso contrário, o número é primo
-    $primos[] = $i;
-
-echo "Impares: " . implode(", ", $primos) . "<br>"; 
-
+        if ($divisores == 0) {
+            $primos[] = $numeroPrimo; // adicionando os números primos dentro de lista
+        }
+    }
+echo "Os 10 primeiros números primos a partdir de $inicio são: " . implode(", ", $primos);
+echo "<br>";
+echo "<br>";
 
 //Exercício n°4:
 
-$lista = [10, 5, 2, 30, 85, 14];
+echo "Array desordenado <br> [10] [5] [2] [30] [85] [14]";
 
-function ordenaLista($lista);
-    for ($i = 0; $i < 6; $i++) {
-        
+$array = [ 10, 5, 2, 30, 85, 14];
+//         0, 1, 2,  3,  4,  5
+
+$tam = count($array) -1; // 6 - 1 = 5
+
+for ($i = 0; $i < $tam; $i++ ) {       
+    for ($j = $tam; $j > 0; $j--) {
+        $anterior = $j -1;
+
+        if ($array[$anterior] > $array[$j]) {
+            $temp = $array[$anterior];
+            $array[$anterior] = $array[$j];
+            $array[$j] = $temp;
+        }
     }
+
+    if ($array[$i] < $array[$j]) {
+        $temp = $array[$i];
+        $array[$i] = $array[$j];
+        $array[$j] = $temp;
+    }
+}
+
+echo "<br><br>Array Ordenado<br>";
+foreach($array as $resultado){
+    echo "[$resultado] ";
+}
