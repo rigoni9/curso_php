@@ -1,104 +1,114 @@
 <?php
 
-require_once "./ArquivoTxt.php";
+require_once "./GerenciadorDeArquivo.php";
 
 class ContaBancaria {
-    public $titular = "";
-    public $destinatario = "";
-    public $saldo = 0;
-    public $historico = [];
-    
-    private function temSaldo($valor) {
+    public string $titular = "";
+    public string $destinatario = "";
+    public float $saldo = 0;
 
-        if ($valor <= $this->saldo) {
-            return true;
+    private GerenciadorDeArquivo $arquivoTxt;
+    
+    public function __construct(GerenciadorDeArquivo $arquivoTxt)
+    {
+        $this->arquivoTxt = $arquivoTxt;
+    }
+    
+    public function listarContas()
+    {
+        $dados = $this->arquivoTxt->ler();
+        
+        foreach ($dados as $idx => $conta) {
+
+            $numConta = $conta['id'];
+            $nome = $conta['nome'];
+            $saldo = $conta['saldo'];
+
+            echo "N° Conta: {$numConta} <br> Nome: {$nome} <br> Saldo: {$saldo}<br><br>";
+        }
+    }
+
+    private function gerarIdConta() {
+        $idsConta = [];
+        $dados = $this->arquivoTxt->ler();
+
+        foreach($dados as $idx => $conta) {
+            $idsConta[] = $conta['id'];
         }
 
+        $proximoId  = array_reverse($idsConta);
+
+        return $proximoId[0] + 1;
+
+    }
+
+    public function criarConta(string $nome, float $saldoInicial = 0.0)
+    {
+        $idConta = $this->gerarIdConta();
+        $dados = $this->arquivoTxt->ler();
+
+        $novaConta = [
+            'id' => $idConta,
+            'nome' => $nome,
+            'saldo' => $saldoInicial,
+        ];
+
+        $dados[] = $novaConta;
+        $this->arquivoTxt->escrever($dados);
+    }
+
+    public function sacar($idConta, $valor) {
+        $dados = $this->arquivoTxt->ler();
+        foreach ($dados as &$conta) {
+            if ($conta['id'] === $idConta) {
+                if ($conta['saldo'] >= $valor) {
+                    $conta['saldo'] -= $valor;
+                    $this->arquivoTxt->escrever($dados);
+                    return true;
+                }
+                return false;
+            }
+        }
         return false;
     }
 
-    public function sacar($valor) {
-        $temSaldo = $this->temSaldo($valor);
+    public function depositar($idConta, $valor) {
 
-        if (!$temSaldo) {
-            throw new Exception("Erro! Saldo atual R$: $this->saldo. Valor à sacar:  R$ $valor.");
+        $dados = $this->arquivoTxt->ler();
+
+        foreach ($dados as $idx => &$conta) {
+
+            if ($conta['id'] === $idConta) {
+                $conta['saldo'] += $valor;
+                $this->arquivoTxt->escrever($dados);
+                return true;
+            }
         }
-
-        $this->saldo -= $valor; // $this->saldo = $this->saldo - $valor;
-        $this->setHistorico($this->titular, $this->saldo);
-    }
-
-    public function depositar($valor) {
-
-        if ($valor <= 0) {
-            throw new Exception("Erro! Valor invalido. R$ $valor.");
-        }
-
-        $this->saldo += $valor;
-        $this->setHistorico($this->titular, $this->saldo, "Deposito");
+        return false;
     }
 
     public function pix($valor) {
 
-        $temSaldo = $this->temSaldo($valor);
-
-        if (!$temSaldo) {
-           throw new Exception("Erro ao efetuar o PIX.<br> Saldo atual R$: $this->saldo. valor a transferir R$ $valor.");
-        }
-
-        $this->saldo -= $valor;
-        $this->setHistorico("Ana", $this->saldo, "Maria");
     }
 
-    private function setHistorico($titular, $valor, $destinatario = "Saque") {
-        $arrDestinatario = [
-            $destinatario => $valor,
-        ];
-
-        $arrTitular = [
-            $titular => $arrDestinatario,
-        ];
-
-        $this->historico[] = $arrTitular;
-    }
-
-    public function extrato() {
-        // $this->historico = [
-        //     "odair" => [
-        //         "ariel" => 20.50
-        //     ],
-        //     "ariel" => [
-        //         "diego" => 50
-        //     ]
-        // ];
-
-        for($i=0; $i < count($this->historico); $i++) {
-            foreach($this->historico[$i] as $titular => $destinatarios) {
-                foreach($destinatarios as $destinatario => $valor) {
-                    echo "Titular: $titular Destinatario: $destinatario valor: R$ $valor.<br>";
-                }
+    public function extrato($idConta) {
+        $dados = $this->arquivoTxt->ler();
+        
+        foreach ($dados as $conta) {
+            if ($conta['id'] === $idConta) {
+                return $conta['saldo'];
             }
         }
-
+        
+        return null; 
     }
 }
-
-// $conta = new ContaBancaria();
-// $conta->depositar(500);
-// $conta->sacar(100);
-// $conta->pix(200);
-// echo $conta->extrato();
-
-$caminhoArquivo = "C://users//aluno//documents//";
 $nomeArquivo = "banco_do_brasil.txt";
-$arquivo = $caminhoArquivo . $nomeArquivo;
 
-$arquivoTxt = new ArquivoTxt($nomeArquivo);
-$conta = [
-    "id" => 10,
-    "nome" => "Joao",
-    "saldo" => 100,
-];
+$arquivoTxt = new GerenciadorDeArquivo($nomeArquivo);
+$conta = new ContaBancaria($arquivoTxt);
 
-$arquivoTxt->escrever($conta);
-echo $arquivoTxt->ler();
+$conta->criarConta("Rafael", 150);
+// $conta->depositar(10, 500);
+// echo $conta->extrato(10);
+echo $conta->listarContas();
