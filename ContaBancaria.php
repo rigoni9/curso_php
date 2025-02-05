@@ -108,7 +108,11 @@ $nomeArquivo = "banco_do_brasil.txt";
 $arquivoTxt = new GerenciadorDeArquivo($nomeArquivo);
 $conta = new ContaBancaria($arquivoTxt);
 
-$conta->criarConta("Rafael", 150);
-// $conta->depositar(10, 500);
+//$conta->criarConta("Diego", 1320);
+$conta->depositar(2, 128);
 // echo $conta->extrato(10);
 echo $conta->listarContas();
+
+//permissão
+// sudo chmod 777 -R .
+//qwe123!
