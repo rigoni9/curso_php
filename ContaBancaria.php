@@ -1,3 +1,4 @@
+
 <?php
 
 require_once "./GerenciadorDeArquivo.php";
@@ -87,8 +88,27 @@ class ContaBancaria {
         return false;
     }
 
-    public function pix($valor) {
+    public function pix($contaOrigem, $contaDestino, $valor) {
 
+        $dados = $this->arquivoTxt->ler();
+        
+        foreach($dados as $idx => &$conta){
+            if ($this->extrato($contaOrigem) < $valor){
+                break;
+            }
+
+            if ($conta['id'] === $contaOrigem) {
+                $conta['saldo'] -= $valor;
+                $this->arquivoTxt->escrever($dados);
+            }
+
+            if ($conta['id'] === $contaDestino) {
+                $conta['saldo'] += $valor;
+                $this->arquivoTxt->escrever($dados);
+            }
+        }
+
+        return false;
     }
 
     public function extrato($idConta) {
@@ -108,11 +128,7 @@ $nomeArquivo = "banco_do_brasil.txt";
 $arquivoTxt = new GerenciadorDeArquivo($nomeArquivo);
 $conta = new ContaBancaria($arquivoTxt);
 
-//$conta->criarConta("Diego", 1320);
-$conta->depositar(2, 128);
+$conta->criarConta("Rafael", 150);
+// $conta->depositar(10, 500);
 // echo $conta->extrato(10);
 echo $conta->listarContas();
-
-//permissão
-// sudo chmod 777 -R .
-//qwe123!
