@@ -25,9 +25,6 @@ CREATE DATABASE IF NOT EXISTS `curso_php`;
 
 USE `curso_php`;
 
---CREATE USER 'aluno'@localhost IDENTIFIED BY '1234';
-
---GRANT ALL PRIVILEGES ON *.* TO 'aluno'@localhost IDENTIFIED BY '1234';
 
 DROP TABLE IF EXISTS `conta_bancaria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
